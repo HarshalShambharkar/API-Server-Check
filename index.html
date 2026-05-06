@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ARIA — Sensor Monitor</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    background-color: #0a0c0f;
+    color: #c8d6e5;
+    font-family: 'Barlow', sans-serif;
+    margin: 20px;
+}
+
+.header-title {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 22px;
+    letter-spacing: 4px;
+    color: #00d4aa;
+}
+.header-sub {
+    font-size: 12px;
+    color: #4a6fa5;
+    letter-spacing: 2px;
+}
+
+.metric-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.metric-card {
+    background: #111518;
+    border: 1px solid #1e2a38;
+    border-left: 3px solid #00d4aa;
+    border-radius: 6px;
+    padding: 18px;
+}
+
+.metric-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #4a6fa5;
+    text-transform: uppercase;
+}
+
+.metric-value {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 28px;
+}
+
+.status-ok   { color: #00d4aa; }
+.status-warn { color: #f0a500; }
+.status-fail { color: #e84545; }
+
+input {
+    background: #111;
+    color: #fff;
+    border: 1px solid #333;
+    padding: 8px;
+    width: 300px;
+}
+
+pre {
+    background: #111;
+    padding: 10px;
+    border: 1px solid #333;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header-title">⬡ ARIA</div>
+<div class="header-sub">AUTONOMOUS REAL-TIME IoT ASSISTANT — SENSOR MONITOR v0.1</div>
+
+<hr>
+
+<h3>Configuration</h3>
+<input type="password" id="token" placeholder="Enter Blynk Auth Token">
+
+<h3>Live Sensor Values</h3>
+
+<div class="metric-grid">
+    <div class="metric-card"><div class="metric-label">Vibration</div><div id="v0" class="metric-value"></div></div>
+    <div class="metric-card"><div class="metric-label">Temperature</div><div id="v1" class="metric-value"></div></div>
+    <div class="metric-card"><div class="metric-label">Sound</div><div id="v2" class="metric-value"></div></div>
+    <div class="metric-card"><div class="metric-label">Belt Speed</div><div id="v3" class="metric-value"></div></div>
+    <div class="metric-card"><div class="metric-label">Error Code</div><div id="v4" class="metric-value"></div></div>
+    <div class="metric-card"><div class="metric-label">Machine Status</div><div id="v5" class="metric-value"></div></div>
+</div>
+
+<h3>Raw JSON</h3>
+<pre id="raw"></pre>
+
+<script>
+const BASE = "https://blynk.cloud/external/api/get";
+const PINS = ["v0","v1","v2","v3","v4","v5"];
+
+function getColor(type, value) {
+    if (type === "vibration") {
+        if (value < 4) return "status-ok";
+        if (value < 7) return "status-warn";
+        return "status-fail";
+    }
+    if (type === "temp") {
+        if (value < 80) return "status-ok";
+        if (value < 110) return "status-warn";
+        return "status-fail";
+    }
+    return "status-ok";
+}
+
+async function fetchData() {
+    const token = document.getElementById("token").value;
+    if (!token) return;
+
+    let data = {};
+
+    for (let pin of PINS) {
+        try {
+            let res = await fetch(`${BASE}?token=${token}&${pin}`);
+            let val = await res.text();
+            data[pin] = parseFloat(val);
+        } catch {
+            data[pin] = null;
+        }
+    }
+
+    // Update UI
+    document.getElementById("v0").innerHTML =
+        `<span class="${getColor('vibration', data.v0)}">${data.v0} g</span>`;
+
+    document.getElementById("v1").innerHTML =
+        `<span class="${getColor('temp', data.v1)}">${data.v1} °C</span>`;
+
+    document.getElementById("v2").innerHTML = `${data.v2} dB`;
+    document.getElementById("v3").innerHTML = `${data.v3} %`;
+
+    document.getElementById("v4").innerHTML =
+        data.v4 > 0 ? `<span class="status-warn">E-${data.v4}</span>` : data.v4;
+
+    document.getElementById("v5").innerHTML =
+        data.v5 === 1
+        ? `<span class="status-ok">ONLINE</span>`
+        : `<span class="status-fail">OFFLINE</span>`;
+
+    document.getElementById("raw").textContent =
+        JSON.stringify(data, null, 2);
+}
+
+// Auto refresh
+setInterval(fetchData, 3000);
+</script>
+
+</body>
+</html>
