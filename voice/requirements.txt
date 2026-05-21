@@ -1,0 +1,54 @@
+# ============================================================
+# ARIA VOICE AGENT — SETUP GUIDE
+# Copy-paste each block into your terminal step by step
+# ============================================================
+
+# ────────────────────────────────────────────────────────────
+# STEP 1 — Create virtual environment (run once)
+# ────────────────────────────────────────────────────────────
+# python -m venv venv
+
+# ────────────────────────────────────────────────────────────
+# STEP 2 — Activate virtual environment
+# ────────────────────────────────────────────────────────────
+# Windows PowerShell:
+# venv\Scripts\Activate.ps1
+#
+# Windows CMD:
+# venv\Scripts\activate.bat
+#
+# Mac / Linux:
+# source venv/bin/activate
+
+# ────────────────────────────────────────────────────────────
+# STEP 3 — Install packages (pick ONE method)
+# ────────────────────────────────────────────────────────────
+
+# METHOD A — Standard pip (always works):
+# pip install -r requirements.txt
+
+# METHOD B — uv (faster, if you have it):
+# pip install uv
+# uv pip install -r requirements.txt
+
+# ────────────────────────────────────────────────────────────
+# STEP 4 — Create your .env file
+# ────────────────────────────────────────────────────────────
+# Create a file called .env in this folder and add:
+# GOOGLE_API_KEY=your_key_from_aistudio_google_com
+
+# ────────────────────────────────────────────────────────────
+# STEP 5 — Run (open two terminals, both with venv activated)
+# ────────────────────────────────────────────────────────────
+# Terminal 1:  python server.py
+# Terminal 2:  streamlit run app.py
+# Then open:   http://localhost:8501
+
+# ────────────────────────────────────────────────────────────
+# PACKAGES
+# ────────────────────────────────────────────────────────────
+streamlit
+flask
+flask-cors
+python-dotenv
+requests
