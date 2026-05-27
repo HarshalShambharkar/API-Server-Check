@@ -1,0 +1,94 @@
+Find out which domain the use- case lies
+which industry or business it lies
+who are stakeholders and end user of this problem statement
+which regulation it applies to 
+what are the available features in correct market 
+Let assume a role of domain expert and what is the expected Output other then mentioned in use-case what it is want? what is missing in use-case in plain sight which is not written there? Does the solution exist for this already, what it is? who are the competitors, what are the strength weakness? where they are lacking? where does our solution lies. How did it fit in as compares to other ?what Challenges are we overcoming by using this tool? Pros & cons of it, Suitable extra example
+
+PROBLEM STATEMENT
+
+E-commerce platforms and retailers often face challenges creating engaging, high-quality product descriptions for consumer packaged goods. Manual content creation is time-consuming, costly, and prone to inconsistency, which can negatively impact sales and brand image. There is a growing need for an Al-driven solution that automates generation of persuasive, accurate product descriptions aligned with product features and brand tone. Current tools lack flexibility and often fail to capture essential attributes or marketing appeal. Automating this process would accelerate content production, ensure consistency, and enhance customer engagement across product catalogs.
+
+Data Considerations (Guidelines):
+
+Structured product datasets containing attributes such as size, ingredients, usage instructions, and branding in CSV or JSON formats; existing product descriptions for training prompt examples; public product catalogs and marketing copy for reference; synthetic data generation to expand attribute variations; preprocessing to normalize attribute formats and filter irrelevant data; dataset volume sufficient to represent diverse product types; no personal data involved, minimizing compliance concerns.
+
+Feel free to generate synthetic data where appropriate using the provided environment
+
+SOLUTION EXPECTATIONS
+
+A functional Al prototype that generates persuasive and accurate product descriptions from structured input data via a simple UI; features include batch processing, customization of tone, and output formatting; deliverables include working code, user guide, and demo video demonstrating description quality and batch capabilities; KPIs focus on description relevance and user satisfaction; demo to highlight ease of use and quality of outputs; basic API integration to support product data updates.
+
+Be creative to go beyond as you solve the above needs
+
+
+
+Sample Code- RAG Application 
+import streamlit as st 
+from pdfminer.high_level import extract_text 
+from langchain.text_splitter import RecursiveCharacterTextSplitter 
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings 
+from langchain_community.vectorstores import Chroma 
+from langchain.chains import RetrievalQA 
+import tempfile 
+import os 
+import httpx 
+import tiktoken 
+tiktoken_cache_dir = "./token" 
+TCS Confidential | 15   
+os.environ["TIKTOKEN_CACHE_DIR"] = tiktoken_cache_dir 
+client = httpx.Client(verify=False) 
+# LLM and Embedding setup 
+llm = ChatOpenAI( 
+base_url="URL", 
+model="Model, 
+api_key=" YOUR KEY ", 
+http_client=client 
+) 
+embedding_model = OpenAIEmbeddings( 
+base_url="URL", 
+model="Model", 
+api_key=“YOUR KEY", 
+http_client=client) 
+st.set_page_config(page_title="RAG PDF Summarizer") 
+st.title("     
+RAG-powered PDF Summarizer") 
+upload_file = st.file_uploader("Upload a PDF", type="pdf") 
+if upload_file: 
+with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file: 
+temp_file.write(upload_file.read()) 
+temp_file_path = temp_file.name 
+# Step 1: Extract text 
+raw_text = extract_text(temp_file_path) 
+# Step 2: Chunking  
+   text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap
+=200) 
+   chunks = text_splitter.split_text(raw_text) 
+   # Step 3: Embed and store in Chroma 
+   with st.spinner("Indexing document..."): 
+       vectordb = Chroma.from_texts(chunks, embedding_model,persist_directory="
+./chroma_index") 
+       vectordb.persist() 
+   # Step 4: RAG QA Chain 
+   #retriever 
+= vectordb.as_retriever(search_type="similarity", search_kwargs={"k": 5}) 
+   retriever = vectordb.as_retriever() 
+   rag_chain = RetrievalQA.from_chain_type( 
+       llm=llm, 
+       retriever=retriever, 
+       return_source_documents=True 
+   ) 
+   # Step 5: Ask summarization prompt 
+   summary_prompt = "Please summarize this document based on the key topics:" 
+   with st.spinner("Running RAG summarization..."): 
+       # result = rag_chain.run(summary_prompt) 
+       result = rag_chain.invoke(summary_prompt) 
+   st.subheader("     Summary") 
+   st.write(result)
+
+
+List of Models (Current available)
+
+
+I am in AI hackathon, I need to build the solution for below. Please give me python streamlit app.py requirement.txt and sample data.
+I need to explain the solution the jurey so please give me solution with the industry example that i can explain as stroy with stramlit give custom HTML and and graph if required

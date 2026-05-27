@@ -1,0 +1,599 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║           HACKATHON PROMPT SYSTEM  —  COMPLETE 4-PROMPT KIT         ║
+║           Fill Master Block once. Run prompts in order.             ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+HOW TO USE THIS SYSTEM
+──────────────────────
+  Step 1  →  Fill the MASTER CONTEXT BLOCK (5 min, do this first)
+  Step 2  →  Run PROMPT 1 to build the solution  (~90 min)
+  Step 3  →  Fill the POST-BUILD FIELDS in master block  (2 min)
+  Step 4  →  Run PROMPT 2 for PPT  (~20 min, gamma.app)
+  Step 5  →  Run PROMPT 3 for Architecture Diagram  (~10 min)
+  Step 6  →  Run PROMPT 4 for Presentation Kit  (~10 min)
+
+TEAM OF 5 — WHO RUNS WHAT IN PARALLEL
+──────────────────────────────────────
+  Person 1 + 2  →  PROMPT 1  (solution, biggest job)
+  Person 3      →  PROMPT 2  (PPT, gamma.app, waits for P1 name)
+  Person 4      →  PROMPT 3  (architecture, waits for app.py)
+  Person 5      →  Master Block + PROMPT 4  (presentation kit,
+                   also watches for inconsistencies across all outputs)
+
+JUDGING RUBRIC  (keep this visible while building)
+───────────────────────────────────────────────────
+  Relevance to Problem & Tech Landscape   →  30 points
+  Innovation & Creativity                 →  15 points
+  Feasibility & Scalability               →  15 points
+  Usage of GenAI & AI/ML Techniques       →  20 points
+  Teamwork & Presentation Quality         →  20 points
+  ─────────────────────────────────────────────────────
+  Total                                   →  100 points
+
+
+════════════════════════════════════════════════════════════════════════
+▌MASTER CONTEXT BLOCK  —  paste this at the top of EVERY prompt
+════════════════════════════════════════════════════════════════════════
+
+  HACKATHON CONTEXT
+  ─────────────────
+  Event type      : AI Hackathon  (3 hours total)
+  Team size       : 5 members
+  Framework       : Python Streamlit
+  API base_url    : "URL"
+  API auth        : httpx.Client(verify=False)
+  Demo format     : Pre-recorded video played on big screen
+
+  PROBLEM STATEMENT
+  ─────────────────
+  [PASTE YOUR PROBLEM STATEMENT HERE — exactly as given]
+
+  DATA FORMAT SPECIFIED IN PS
+  ───────────────────────────
+  Primary input   : [e.g. JSON — strictly as stated in PS]
+  Optional inputs : [e.g. CSV, PDF — only if PS allows]
+
+  ── FILL AFTER PROMPT 1 COMPLETES ──────────────────────
+  Solution name   : [chosen from 3 options]
+  Tagline         : [chosen from 3 options]
+  Primary color   : [hex]
+  Secondary color : [hex]
+  Accent color    : [hex]
+  Background      : [hex]
+  Text color      : [hex]
+  Models used     : [list exactly what was used in app.py]
+  Key features    : [3 bullet points of what was actually built]
+  Tech stack      : [e.g. Streamlit, LangChain, ChromaDB, DeepSeek V3]
+  ────────────────────────────────────────────────────────
+
+  JUDGING RUBRIC
+  ──────────────
+  Relevance to Problem & Tech Landscape   →  30 points
+  Innovation & Creativity                 →  15 points
+  Feasibility & Scalability               →  15 points
+  Usage of GenAI & AI/ML Techniques       →  20 points
+  Teamwork & Presentation Quality         →  20 points
+
+
+════════════════════════════════════════════════════════════════════════
+▌PROMPT 1  —  SOLUTION BUILD
+════════════════════════════════════════════════════════════════════════
+
+[PASTE MASTER CONTEXT BLOCK ABOVE THIS LINE]
+
+────────────────────────────────────────────────────────────────────────
+SECTION 1 — DOMAIN INTELLIGENCE  (Think before you build)
+────────────────────────────────────────────────────────────────────────
+
+Assume the role of a senior domain expert. Before writing any
+code, answer every question below. These answers will shape
+every decision you make in the solution.
+
+   1.  Which domain / industry does this problem belong to?
+   2.  Which specific business function or department is affected?
+   3.  Who are the stakeholders? (decision-makers, budget owners)
+   4.  Who are the end users? (people who use this daily)
+   5.  What regulations or compliance requirements apply?
+   6.  What features do existing market solutions already offer?
+   7.  What is the expected output BEYOND what the PS says —
+       what does it implicitly want?
+   8.  What is obviously missing from the PS that an expert
+       would immediately notice?
+   9.  Does a solution already exist? Name it. Strengths,
+       weaknesses, where it is lacking?
+  10.  Where does OUR solution sit vs competitors? What gap
+       does it fill?
+  11.  What challenges does this tool uniquely overcome?
+  12.  What are the pros and cons of the proposed approach?
+  13.  One real-world example beyond the PS that fits perfectly.
+
+────────────────────────────────────────────────────────────────────────
+SECTION 2 — SOLUTION IDENTITY  (Propose before building)
+────────────────────────────────────────────────────────────────────────
+
+Propose exactly 3 options. Wait for selection before any code.
+
+  Format:
+  Option [A / B / C]
+    Name    : (2–4 words, memorable, domain-relevant)
+    Tagline : (benefit-led, max 10 words)
+    Colors  : PRIMARY #hex | SECONDARY #hex | ACCENT #hex
+              BACKGROUND #hex | TEXT #hex
+              — explain why each color fits this domain's
+                emotional context
+
+────────────────────────────────────────────────────────────────────────
+SECTION 3 — PS COMPLIANCE RULES  (Non-negotiable)
+────────────────────────────────────────────────────────────────────────
+
+  STRICT PS COMPLIANCE
+  • Build exactly what the PS specifies — nothing less
+  • Primary input format : use ONLY what PS states
+    (if PS says JSON → JSON is primary, mandatory)
+  • Optional formats (CSV, PDF etc.) may be added as a
+    clearly labeled "Bonus Feature" tab ONLY if PS does
+    not contradict it
+  • Every feature must trace back to a PS requirement
+  • Label anything beyond PS scope as "Extended Feature"
+    so jury sees compliance first, creativity second
+
+  HERO VISUALIZATION  (one per app, mandatory)
+  • Design one domain-specific visualization that a jury
+    has not seen in a standard dashboard
+  • It must be self-explanatory in under 5 seconds —
+    jury should understand it before you speak
+  • Examples by domain:
+      Manufacturing  →  heatmap overlaid on process flow
+      E-commerce     →  product attribute radar + sales funnel
+      Healthcare     →  patient journey timeline + risk heat map
+      Finance        →  sankey flow of transactions + anomaly markers
+  • Let the problem domain decide the chart type —
+    never default to generic bar/line/pie
+
+  SUPPORTING VISUALS  (max 3, after hero viz)
+  • Each must answer one specific jury question instantly
+  • No chart without a clear "so what" label on it
+  • Combine charts that share x-axis or same entity
+  • KPI cards for anything with fewer than 4 data points
+
+  GENAI STACK VISIBILITY  (20 points on rubric)
+  • Show model selection rationale in the UI — a small
+    "Powered by" panel or tooltip explaining:
+      Which model is used for which task and WHY
+      e.g. DeepSeek R1 for reasoning-heavy tasks,
+           V3 for fast generation, 4o-mini for speed
+  • This must be visible without asking — jury should
+    see it in the demo without being told to look
+
+────────────────────────────────────────────────────────────────────────
+SECTION 4 — BUILD RULES  (Apply to every UI element)
+────────────────────────────────────────────────────────────────────────
+
+  [ ACCESSIBILITY — WCAG AA minimum, always ]
+  • Body text on background   : minimum 4.5 : 1 contrast ratio
+  • Headings 18px+            : minimum 3.0 : 1 contrast ratio
+  • Never light-on-light or dark-on-dark
+  • Never use a chart fill color as its own label / legend
+  • Every color decision must state its hex value
+
+  Approved background / text pairs:
+    White card   →  bg #FFFFFF  |  text #1A1A1A
+    Dark panel   →  bg #1E1E2E  |  text #E8E8F0
+    Light card   →  bg #F5F5F5  |  text #111111
+
+  [ CHARTS — readability rules ]
+  • Axis labels  : minimum 12px, color #444444 or darker
+  • Legend text  : minimum 13px, color #1A1A1A on white
+  • Grid lines   : #E0E0E0 only
+  • Max 5 series colors per chart
+  • Data table below every chart (accessibility fallback)
+
+  [ LANGUAGE SELECTOR ]
+  • Position : top of app, always visible
+  • Options  : English | Hindi | Marathi | Hinglish |
+               Spanish | Japanese
+  • ALL UI text follows selected language — labels, buttons,
+    placeholders, tooltips, errors, chart titles, legends
+  • Hinglish: Roman script  (e.g. "Yeh result dikhata hai…")
+  • Font stack: system-ui, 'Noto Sans', sans-serif
+  • Persists entire session. Fallback: English
+
+  [ SYNTHETIC DATA ]
+  • Domain-realistic names and values — never "Product A / B"
+  • Minimum 50 rows for meaningful charts
+  • "Synthetic Data" disclaimer badge on every chart
+
+────────────────────────────────────────────────────────────────────────
+SECTION 5 — ENVIRONMENT  (Do not change anything here)
+────────────────────────────────────────────────────────────────────────
+
+Sample Code — RAG Application
+──────────────────────────────
+import streamlit as st
+from pdfminer.high_level import extract_text
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_community.vectorstores import Chroma
+from langchain.chains import RetrievalQA
+import tempfile
+import os
+import httpx
+import tiktoken
+tiktoken_cache_dir = "./token"
+os.environ["TIKTOKEN_CACHE_DIR"] = tiktoken_cache_dir
+client = httpx.Client(verify=False)
+llm = ChatOpenAI(
+    base_url="URL",
+    model="Model",
+    api_key="YOUR KEY",
+    http_client=client
+)
+embedding_model = OpenAIEmbeddings(
+    base_url="URL",
+    model="Model",
+    api_key="YOUR KEY",
+    http_client=client
+)
+st.set_page_config(page_title="RAG PDF Summarizer")
+st.title("RAG-powered PDF Summarizer")
+upload_file = st.file_uploader("Upload a PDF", type="pdf")
+if upload_file:
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
+        temp_file.write(upload_file.read())
+        temp_file_path = temp_file.name
+    raw_text = extract_text(temp_file_path)
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=1000, chunk_overlap=200)
+    chunks = text_splitter.split_text(raw_text)
+    with st.spinner("Indexing document..."):
+        vectordb = Chroma.from_texts(
+            chunks, embedding_model,
+            persist_directory="./chroma_index")
+        vectordb.persist()
+    retriever = vectordb.as_retriever()
+    rag_chain = RetrievalQA.from_chain_type(
+        llm=llm,
+        retriever=retriever,
+        return_source_documents=True
+    )
+    summary_prompt = "Please summarize this document based on the key topics:"
+    with st.spinner("Running RAG summarization..."):
+        result = rag_chain.invoke(summary_prompt)
+    st.subheader("Summary")
+    st.write(result)
+
+List of Models (Current available)
+────────────────────────────────────
+
+
+────────────────────────────────────────────────────────────────────────
+SECTION 6 — OUTPUT  (Deliver in this exact order)
+────────────────────────────────────────────────────────────────────────
+
+I am in a 3-hour AI hackathon. Build the full solution.
+Deliver in this order:
+
+  1. app.py
+     • Streamlit app with custom HTML/CSS via
+       st.components.v1.html()
+     • Hero visualization first, supporting charts after
+     • GenAI stack panel visible in UI
+     • Language selector at top
+     • Apply all Build Rules from Section 4
+
+  2. requirements.txt
+     Pinned versions only. No unnecessary packages.
+
+  3. sample_data/
+     Domain-realistic synthetic data (50+ rows).
+     Filenames reflect domain — not generic names.
+
+  4. README.md
+     Written as a jury story:
+       • Meet [Name] — [role] at [real company type]
+       • The problem they face every single day
+       • How this solution changes their day
+       • "So what?" — 2 sentences on real-world impact
+       • Architecture overview (ASCII or Mermaid)
+       • How to run  (step-by-step)
+
+  Strictly follow PS requirements.
+  Label anything beyond PS scope as "Extended Feature."
+  Be creative within the boundaries. Go beyond the obvious.
+
+
+════════════════════════════════════════════════════════════════════════
+▌PROMPT 2  —  PPT  (gamma.app, 10 slides)
+════════════════════════════════════════════════════════════════════════
+
+[PASTE MASTER CONTEXT BLOCK ABOVE THIS LINE]
+[ENSURE POST-BUILD FIELDS ARE FILLED BEFORE RUNNING THIS]
+
+────────────────────────────────────────────────────────────────────────
+
+You are a presentation designer and storyteller for a hackathon
+jury panel. Create a 10-slide presentation for gamma.app using
+the solution details from the master context block above.
+
+TONE
+────
+Professional but human. Confident, not stiff. One light moment
+(humor or self-aware observation) placed on Slide 2 or 3 to
+wake the jury up — keep it relevant to the problem domain,
+keep it short, one line maximum.
+
+RUBRIC MAPPING  (every slide must earn its points)
+───────────────────────────────────────────────────
+  Slides 2–5  →  Relevance to Problem & Tech Landscape  (30 pts)
+  Slide  6    →  Innovation & Creativity                (15 pts)
+  Slide  7    →  GenAI Stack                            (20 pts)
+  Slide  8    →  Feasibility & Scalability              (15 pts)
+  Slides 9–10 →  Teamwork & Presentation Quality        (20 pts)
+
+SLIDE STRUCTURE
+───────────────
+
+  Slide 1 — TITLE
+    • Solution name + tagline (from master block)
+    • Team name + all 5 member names
+    • Event name + date
+    • Color scheme: use PRIMARY and BACKGROUND from master block
+
+  Slide 2 — PROBLEM STATEMENT
+    • Restate PS in plain language — not jargon
+    • Who suffers from this problem? (stakeholder + end user)
+    • One number that makes the pain real
+      (e.g. "Manual content takes 4 hrs per product")
+    • [HUMOR PLACEMENT] — one light self-aware line about
+      the problem that the jury will remember
+
+  Slide 3 — BACKGROUND & CONTEXT
+    • Industry landscape in 3 bullet points
+    • Why this problem exists now (timing, market shift)
+    • Regulation or compliance angle if applicable
+
+  Slide 4 — CURRENT SOLUTIONS & COMPETITORS
+    • Name 2–3 real existing tools
+    • Comparison table: Feature | Competitor | Our Solution
+    • Keep it factual, not dismissive
+
+  Slide 5 — GAPS & OUR OPPORTUNITY
+    • What competitors are missing (specific, not vague)
+    • Pros & cons of our approach (honest, 2 each)
+    • One sentence: "We fit here because…"
+
+  Slide 6 — OUR SOLUTION  (hero slide)
+    • Solution name + tagline prominent
+    • Screenshot or description of hero visualization
+    • 3 key features — each mapped to a PS requirement
+    • "So what?" — 2 sentences on real-world impact
+    • [DEMO VIDEO] placeholder note:
+      "▶ Demo video plays here — [duration] seconds"
+
+  Slide 7 — GENAI & AI/ML STACK
+    • Which model does what — table format:
+        Task              | Model Used          | Why This Model
+        ──────────────────────────────────────────────────────
+        [task]            | [model name]        | [1-line reason]
+    • Technique used: RAG / fine-tuning / prompt engineering
+      / embeddings / vision — name it, explain it in one line
+    • This slide must make the jury think
+      "they actually know what they're doing"
+
+  Slide 8 — ARCHITECTURE & FEASIBILITY
+    • Architecture described clearly:
+        User → UI → [processing layer] → LLM → Output
+    • How it scales: one paragraph, 3 sentences max
+      (e.g. "swap local vector store for cloud,
+              add queue for batch, containerize — done")
+    • Local demo note: "Runs locally, production-ready
+      with [X] infrastructure change"
+
+  Slide 9 — USER FLOW & DEMO HIGHLIGHTS
+    • Step-by-step user journey (5–7 steps max)
+    • Key demo moment called out:
+      "Watch what happens when [X]…"
+    • One screenshot or wireframe of the UI
+
+  Slide 10 — FUTURE SCOPE & CLOSE
+    • 3 future features — each tied to a scoring criterion
+    • Team confidence close: one strong final sentence
+      (not "thank you", something memorable)
+    • Contact / repo link if applicable
+
+VISUAL RULES FOR GAMMA.APP
+───────────────────────────
+  • Use the color scheme from master block throughout
+  • Heading text: TEXT color from master block
+  • Body text: always high contrast vs slide background
+  • No dark text on dark background, no light on light
+  • Font: clean sans-serif, consistent across all slides
+  • Max 5 bullet points per slide
+  • Every slide has a clear visual hierarchy:
+    big idea → supporting detail → evidence
+
+
+════════════════════════════════════════════════════════════════════════
+▌PROMPT 3  —  ARCHITECTURE DIAGRAM
+════════════════════════════════════════════════════════════════════════
+
+[PASTE MASTER CONTEXT BLOCK ABOVE THIS LINE]
+[PASTE FULL app.py SOURCE CODE BELOW THIS LINE]
+
+────────────────────────────────────────────────────────────────────────
+
+You are a technical architect and visual designer.
+Read the source code above carefully. Generate an architecture
+diagram that reflects EXACTLY what was built — not what was
+planned, what was actually coded.
+
+DIAGRAM STYLE
+─────────────
+  Style       : 3D isometric illustration
+  Detail      : Name every technology, library, and service
+                exactly as used in the code
+  Labels      : Component name + technology name on every block
+                (e.g. "Vector Store — ChromaDB"
+                       "LLM — DeepSeek V3-0324"
+                       "Embeddings — text-embedding-3-large")
+  Flow arrows : Show data flow direction clearly
+  Color       : Use the color scheme from master context block
+
+WHAT TO INCLUDE  (derive from source code)
+───────────────────────────────────────────
+  • User interface layer  (Streamlit components used)
+  • Input handling        (file type, format, upload method)
+  • Processing pipeline   (chunking, preprocessing steps)
+  • AI/ML layer           (every model, embedding, chain)
+  • Storage layer         (vector store, temp files, cache)
+  • Output layer          (what the user sees / receives)
+  • External connections  (API endpoint, auth method)
+
+WHAT NOT TO DO
+──────────────
+  • Do not add components not present in the code
+  • Do not use generic names — use exact library/model names
+  • Do not make it look like a generic RAG diagram —
+    it must look like THIS solution specifically
+
+OUTPUT FORMAT
+─────────────
+  Deliver as:
+  1. A detailed Mermaid diagram (for README and Slide 8)
+  2. A written prompt for generating the 3D isometric version
+     in an image generation tool (Midjourney / DALL-E / etc.)
+     Include: exact colors (hex), component names, layout
+     description, isometric perspective instructions
+
+
+════════════════════════════════════════════════════════════════════════
+▌PROMPT 4  —  PRESENTATION KIT
+════════════════════════════════════════════════════════════════════════
+
+[PASTE MASTER CONTEXT BLOCK ABOVE THIS LINE]
+[PASTE SLIDE STRUCTURE FROM PROMPT 2 OUTPUT ABOVE THIS LINE]
+
+────────────────────────────────────────────────────────────────────────
+
+You are a hackathon presentation coach. Generate a complete
+presentation kit for a team of 5. They have a 10-minute slot:
+7 minutes presentation + 3 minutes jury Q&A.
+Demo video is pre-recorded and plays during the presentation.
+
+────────────────────────────────────────────────────────────────────────
+PART A — DEMO VIDEO SCRIPT
+────────────────────────────────────────────────────────────────────────
+
+Write a screen-by-screen voiceover script for the demo video.
+Total duration: 90–120 seconds maximum.
+
+FORMAT FOR EACH SCENE:
+  [SCENE X — Screen: what is shown on screen]
+  Duration  : X seconds
+  Voiceover : Exact words to say
+  Action    : What the presenter clicks / does on screen
+  Focus     : What the jury's eye should go to
+
+SCENES TO COVER:
+  Scene 1 — App landing screen with solution name visible
+  Scene 2 — Language selector being changed
+            (show it works, 5 seconds)
+  Scene 3 — JSON input upload / paste
+            (primary input as per PS — show this first)
+  Scene 4 — Processing / generation happening
+            (the "wow" moment — hero visualization appearing)
+  Scene 5 — Output displayed
+            (describe what changed, what was generated)
+  Scene 6 — One "extended feature" if built
+            (clearly labeled bonus, quick, 10 seconds)
+  Scene 7 — Close on solution name + tagline screen
+
+VOICEOVER TONE: confident, clear, no filler words.
+Every word earns its second of screen time.
+
+────────────────────────────────────────────────────────────────────────
+PART B — TEAM PRESENTATION SCRIPT  (line by line, all 5 members)
+────────────────────────────────────────────────────────────────────────
+
+Write a complete word-for-word script. Assign lines to
+Member 1 through Member 5. Every member must speak.
+No member speaks more than 3 slides consecutively.
+
+RULES:
+  • Each line is max 2–3 sentences — short, speakable
+  • Include transition cues:
+    [MEMBER X hands over to MEMBER Y]
+    [CLICK to next slide]
+    [VIDEO PLAYS — pause speaking]
+    [VIDEO ENDS — resume]
+  • Humor placement: one light line, marked [HUMOR],
+    on Slide 2 or 3 — relevant to domain, confident,
+    not forced. Example style:
+    "We've all read a product description that said
+    'premium synergistic solution' and understood nothing.
+    We fixed that." — then move on immediately
+  • Each member owns their slides fully — they introduce,
+    explain, and hand off
+
+FORMAT:
+
+  ── SLIDE 1 — MEMBER [X] ──────────────────────────
+  [exact words to say]
+  [CLICK]
+
+  ── SLIDE 2 — MEMBER [X] ──────────────────────────
+  [exact words to say]
+  [HUMOR]
+  [exact words to say]
+  [CLICK]
+
+  ... and so on for all 10 slides
+
+  ── VIDEO SEGMENT — ALL MEMBERS ───────────────────
+  Member [X]: "Let me show you this in action."
+  [VIDEO PLAYS]
+  Member [X]: [2 lines bridging video back to slides]
+
+────────────────────────────────────────────────────────────────────────
+PART C — JURY Q&A PREP
+────────────────────────────────────────────────────────────────────────
+
+Write the 5 most likely jury questions for this specific
+solution with sharp, confident 2–3 line answers.
+Assign each question to the team member best suited to answer.
+
+FORMAT:
+  Q[X]: [question]
+  Owner  : Member [X]  (role: e.g. "tech lead", "domain expert")
+  Answer : [exact words — confident, no waffle]
+
+QUESTIONS MUST INCLUDE:
+  1. Why this model over the others available?
+  2. How does this scale beyond the demo?
+  3. What is the accuracy / reliability of the output?
+  4. What happens with bad or incomplete input data?
+  5. One domain-specific question based on the PS
+
+────────────────────────────────────────────────────────────────────────
+PART C — CONSISTENCY CHECKLIST  (Person 5 runs this before presenting)
+────────────────────────────────────────────────────────────────────────
+
+Verify every item below before the team walks on stage:
+
+  [ ] Solution name matches across: app UI, PPT slide 1,
+      architecture diagram, demo video, README
+  [ ] Color scheme consistent: app, PPT, diagram all use
+      same PRIMARY, SECONDARY, ACCENT hex values
+  [ ] Demo video shows JSON input first (PS compliance)
+  [ ] Every PPT slide maps to at least one rubric criterion
+  [ ] GenAI stack slide names exact models used in app.py
+  [ ] Architecture diagram matches actual app.py code
+  [ ] All 5 members have spoken lines rehearsed
+  [ ] Humor line rehearsed — lands naturally, not forced
+  [ ] Jury Q&A answers rehearsed by assigned members
+  [ ] Total presentation time tested: under 7 minutes
+
+
+════════════════════════════════════════════════════════════════════════
+END OF HACKATHON PROMPT SYSTEM
+════════════════════════════════════════════════════════════════════════
